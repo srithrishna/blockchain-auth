@@ -24,7 +24,6 @@
     "nodemon":"3.1.0"
   },
   "scripts": {
-    "start": "",
     "dev": "nodemon src/index.js",
     "devJs": "esbuild src/frontend/index.tsx --watch --bundle --outfile=src/public/assets/scripts.js",
     "test": "echo \"Error: no test specified\" && exit 1"
