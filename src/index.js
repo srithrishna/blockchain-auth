@@ -1,17 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+require('dotenv').config()
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const express = require('express')
+const router = require('./routes')
+const Session = require('express-session')
+
+
+const app = express()
+app.use(express.json())
+
+
+app.use(
+  Session({
+    name: 'siwe-quickstart',
+    secret: 'siwe-quickstart-secret',
+    resave: true,
+    saveUninitialized: true,
+    cookie: { secure: false, sameSite: true },
+  })
+)
+app.use(express.static(__dirname + '/public'))
+app.use(router)
+
+// Start app
+app.listen(process.env.PORT)
